@@ -159,7 +159,7 @@ func NewClient(socket *unet.Socket, messageSize uint32, version string) (*Client
 		version, ok := parseVersion(rversion.Version)
 		if !ok {
 			// The server gave us a bad version. We return a generically worrisome error.
-			log.Warningf("server returned bad version string %q", rversion.Version)
+			ulog.Warningf("server returned bad version string %q", rversion.Version)
 			return nil, ErrBadVersionString
 		}
 		c.version = version
@@ -180,7 +180,7 @@ func (c *Client) handleOne() {
 
 		// Not expecting this message?
 		if resp == nil {
-			log.Warningf("client received unexpected tag %v, ignoring", tag)
+			ulog.Warningf("client received unexpected tag %v, ignoring", tag)
 			return nil, ErrUnexpectedTag
 		}
 

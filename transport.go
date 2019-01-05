@@ -72,8 +72,8 @@ func send(s *unet.Socket, tag Tag, m message) error {
 	data := dataPool.Get().([]byte)
 	dataBuf := buffer{data: data[:0]}
 
-	if log.IsLogging(log.Debug) {
-		log.Debugf("send [FD %d] [Tag %06d] %s", s.FD(), tag, m.String())
+	if ulog.IsLogging(ulog.Debug) {
+		ulog.Debugf("send [FD %d] [Tag %06d] %s", s.FD(), tag, m.String())
 	}
 
 	// Encode the message. The buffer will grow automatically.
@@ -333,8 +333,8 @@ func recv(s *unet.Socket, msize uint32, lookup lookupTagAndType) (Tag, message, 
 		fds = nil
 	}
 
-	if log.IsLogging(log.Debug) {
-		log.Debugf("recv [FD %d] [Tag %06d] %s", s.FD(), tag, m.String())
+	if ulog.IsLogging(ulog.Debug) {
+		ulog.Debugf("recv [FD %d] [Tag %06d] %s", s.FD(), tag, m.String())
 	}
 
 	// All set.

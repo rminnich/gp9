@@ -51,7 +51,7 @@ func ExtractErrno(err error) syscall.Errno {
 	}
 
 	// Default case.
-	log.Warningf("unknown error: %v", err)
+	ulog.Warningf("unknown error: %v", err)
 	return syscall.EIO
 }
 

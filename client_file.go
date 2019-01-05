@@ -208,7 +208,7 @@ func (c *clientFile) Close() error {
 	if err := c.client.sendRecv(&Tclunk{FID: c.fid}, &Rclunk{}); err != nil {
 		// If an error occurred, we toss away the FID. This isn't ideal,
 		// but I'm not sure what else makes sense in this context.
-		log.Warningf("Tclunk failed, losing FID %v: %v", c.fid, err)
+		ulog.Warningf("Tclunk failed, losing FID %v: %v", c.fid, err)
 		return err
 	}
 

@@ -419,7 +419,7 @@ func (cs *connState) handleRequest() {
 	// Try to start the tag.
 	if !cs.StartTag(tag) {
 		// Nothing we can do at this point; client is bogus.
-		log.Debugf("no valid tag [%05d]", tag)
+		ulog.Debugf("no valid tag [%05d]", tag)
 		cs.sendDone <- ErrNoValidMessage
 		return
 	}
@@ -432,7 +432,7 @@ func (cs *connState) handleRequest() {
 			recover()
 
 			// Include a useful log message.
-			log.Warningf("panic in handler: %s", debug.Stack())
+			ulog.Warningf("panic in handler: %s", debug.Stack())
 
 			// Wrap in an EFAULT error; we don't really have a
 			// better way to describe this kind of error. It will
