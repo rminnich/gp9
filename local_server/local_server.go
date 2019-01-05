@@ -78,6 +78,13 @@ func (l *local) Attach() (p9.File, error) {
 func (l *local) Walk(names []string) ([]p9.QID, p9.File, error) {
 	var qids []p9.QID
 	last := &local{path: l.path}
+	if len(names) == 0 {
+		qid, _, err := last.info()
+		if err != nil {
+			return nil, nil, err
+		}
+		qids = append(qids, qid)
+	}
 	for _, name := range names {
 		c := &local{path: path.Join(last.path, name)}
 		qid, _, err := c.info()
