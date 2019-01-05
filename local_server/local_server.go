@@ -29,9 +29,11 @@ import (
 	"syscall"
 
 	"fd"
-	"ulog"
 	"p9"
+	"ulog"
 	"unet"
+
+	"golang.org/x/sys/unix"
 )
 
 // local wraps a local file.
@@ -101,7 +103,22 @@ func (l *local) Walk(names []string) ([]p9.QID, p9.File, error) {
 //
 // Not implemented.
 func (l *local) StatFS() (p9.FSStat, error) {
-	return p9.FSStat{}, syscall.ENOSYS
+	var u = &unix.Statfs_t{}
+	if err := unix.Statfs(l.path, u); err != nil {
+		return p9.FSStat{}, err
+	}
+	var st p9.FSStat = p9.FSStat{
+		Type:            uint32(u.Type),
+		BlockSize:       uint32(u.Bsize),
+		Blocks:          u.Blocks,
+		BlocksFree:      u.Bfree,
+		BlocksAvailable: u.Bavail,
+		Files:           u.Files,
+		FilesFree:       u.Ffree,
+		FSID:            uint64(u.Fsid.Val[0]), // wut?
+		NameLength:      uint32(u.Namelen),
+	}
+	return st, syscall.ENOSYS
 }
 
 // FSync implements p9.File.FSync.
