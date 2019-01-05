@@ -57,7 +57,7 @@ func (l *local) info() (p9.QID, os.FileInfo, error) {
 		fi, err = os.Lstat(l.path)
 	}
 	if err != nil {
-		log.Warningf("error stating %#v: %v", l, err)
+		ulog.Warningf("error stating %#v: %v", l, err)
 		return qid, nil, err
 	}
 
@@ -324,17 +324,17 @@ func (l *local) Renamed(parent p9.File, newName string) {
 }
 
 func main() {
-	log.SetLevel(log.Debug)
+	ulog.SetLevel(ulog.Debug)
 
 	if len(os.Args) != 2 {
-		log.Warningf("usage: %s <bind-addr>", os.Args[0])
+		ulog.Warningf("usage: %s <bind-addr>", os.Args[0])
 		os.Exit(1)
 	}
 
 	// Bind and listen on the socket.
 	serverSocket, err := unet.BindAndListen(os.Args[1], false)
 	if err != nil {
-		log.Warningf("err binding: %v", err)
+		ulog.Warningf("err binding: %v", err)
 		os.Exit(1)
 	}
 
