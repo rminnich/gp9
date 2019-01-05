@@ -23,8 +23,8 @@ import (
 	"sync/atomic"
 	"syscall"
 
-	"gvisor.googlesource.com/gvisor/pkg/fd"
-	"gvisor.googlesource.com/gvisor/pkg/log"
+	"fd"
+	"ulog"
 )
 
 // ExtractErrno extracts a syscall.Errno from a error, best effort.

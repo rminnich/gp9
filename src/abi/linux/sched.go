@@ -12,21 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package log
+package linux
 
-import (
-	"reflect"
-	"unsafe"
+// Scheduling policies, exposed by sched_getscheduler(2)/sched_setscheduler(2).
+const (
+	SCHED_NORMAL   = 0
+	SCHED_FIFO     = 1
+	SCHED_RR       = 2
+	SCHED_BATCH    = 3
+	SCHED_IDLE     = 5
+	SCHED_DEADLINE = 6
+	SCHED_MICROQ   = 16
+
+	// SCHED_RESET_ON_FORK is a flag that indicates that the process is
+	// reverted back to SCHED_NORMAL on fork.
+	SCHED_RESET_ON_FORK = 0x40000000
 )
-
-// unsafeString returns a string that points to the given byte array.
-// The byte array must be preserved until the string is disposed.
-func unsafeString(data []byte) (s string) {
-	if len(data) == 0 {
-		return
-	}
-
-	(*reflect.StringHeader)(unsafe.Pointer(&s)).Data = uintptr(unsafe.Pointer(&data[0]))
-	(*reflect.StringHeader)(unsafe.Pointer(&s)).Len = len(data)
-	return
-}

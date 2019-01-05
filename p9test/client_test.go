@@ -28,8 +28,8 @@ import (
 	"time"
 
 	"github.com/golang/mock/gomock"
-	"gvisor.googlesource.com/gvisor/pkg/fd"
-	"gvisor.googlesource.com/gvisor/pkg/p9"
+	"fd"
+	"p9"
 )
 
 func TestPanic(t *testing.T) {

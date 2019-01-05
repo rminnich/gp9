@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package log
+package ulog
 
 import (
 	"os"
@@ -20,7 +20,7 @@ import (
 )
 
 // GoogleEmitter is a wrapper that emits logs in a format compatible with
-// package github.com/golang/glog.
+// package ulog.
 type GoogleEmitter struct {
 	// Emitter is the underlying emitter.
 	Emitter
@@ -90,7 +90,7 @@ func calculateBytes(v int, pad int) []byte {
 
 // pid is used for the threadid component of the header.
 //
-// The glog package logger uses 7 spaces of padding. See
+// The glog package ulogger uses 7 spaces of padding. See
 // glob.loggingT.formatHeader.
 var pid = calculateBytes(os.Getpid(), 7)
 

@@ -18,7 +18,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"gvisor.googlesource.com/gvisor/pkg/fd"
+	"fd"
 )
 
 // ErrInvalidMsgType is returned when an unsupported message type is found.

@@ -18,7 +18,7 @@ import (
 	"syscall"
 	"testing"
 
-	"gvisor.googlesource.com/gvisor/pkg/unet"
+	"unet"
 )
 
 // TestVersion tests the version negotiation.

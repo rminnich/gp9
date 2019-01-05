@@ -14,10 +14,10 @@
 
 // Package log implements a library for logging.
 //
-// This is separate from the standard logging package because logging may be a
+// This is separate from the standard logging package ulogging may be a
 // high-impact activity, and therefore we wanted to provide as much flexibility
 // as possible in the underlying implementation.
-package log
+package ulog
 
 import (
 	"fmt"
@@ -30,7 +30,7 @@ import (
 	"syscall"
 	"time"
 
-	"gvisor.googlesource.com/gvisor/pkg/linewriter"
+	"linewriter"
 )
 
 // Level is the log level.
@@ -147,7 +147,7 @@ func (t TestEmitter) Emit(level Level, timestamp time.Time, format string, v ...
 }
 
 // Logger is a high-level logging interface. It is in fact, not used within the
-// log package. Rather it is provided for others to provide contextual loggers
+// log package uloggers
 // that may append some addition information to log statement. BasicLogger
 // satisfies this interface, and may be passed around as a Logger.
 type Logger interface {
